@@ -10,29 +10,35 @@
   --color-bronze-light: #e8993e;
   --color-bronze-dark: #b56a15;
 
-  --font-sans: 'Inter', sans-serif;
-  --font-display: 'Playfair Display', serif;
+  --font-sans: 'Raleway', sans-serif;
+  --font-display: 'Newsreader', serif;
+  --font-accent: 'Plus Jakarta Sans', sans-serif;
 }
 
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@layer base {
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-body {
-  font-family: var(--font-sans);
-  background-color: var(--color-ghost);
-  color: var(--color-onyx);
-  overflow-x: hidden;
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-ghost);
+    color: var(--color-onyx);
+    overflow-x: hidden;
+  }
+
 }
 
 ::-webkit-scrollbar {
@@ -91,4 +97,18 @@ body {
 .slide-up-leave-to {
   opacity: 0;
   transform: translateY(-10px);
+}
+
+
+/* the size of the text in the description of the hero should be the main text size every in the app. make it a little bolder just a little still increase the hero headline and make the text still bigger the circles are nice but not visible... make it a an animated */
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 60s linear infinite;
+  display: flex;
+  width: max-content;
 }

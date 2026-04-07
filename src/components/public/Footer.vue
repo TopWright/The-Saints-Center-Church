@@ -1,102 +1,107 @@
+<script setup>
+const serviceTimes = [
+  { day: 'Sundays', time: '7:00 AM, 9:30 AM, 12:00 PM', icon: 'pi-calendar' },
+  { day: 'Wednesdays', time: '6:00 PM', icon: 'pi-clock' }
+]
+
+const communityLinks = [
+  { name: 'Sermons', to: '/sermons', icon: 'pi-video' },
+  { name: 'Programmes', to: '/programmes', icon: 'pi-ticket' },
+  { name: 'Privacy Policy', to: '#', icon: 'pi-shield' },
+  { name: 'Terms of Service', to: '#', icon: 'pi-file' }
+]
+
+const connectLinks = [
+  { name: 'WhatsApp', icon: 'pi-whatsapp', to: '#' },
+  { name: 'Instagram', icon: 'pi-instagram', to: '#' },
+  { name: 'Facebook', icon: 'pi-facebook', to: '#' },
+  { name: 'Twitter (X)', icon: 'pi-twitter', to: '#' }
+]
+</script>
+
 <template>
-  <footer class="bg-onyx text-ghost pt-16 pb-8">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-        <div>
-          <div class="flex items-center gap-3 mb-4">
-            <img src="/logo.png" alt="TSC" class="w-10 h-10 object-contain" />
-            <div>
-              <span class="font-display font-bold text-lg block">The Saints Center</span>
-              <span class="text-wisteria text-xs tracking-wider">Raising Messengers</span>
+  <footer class="bg-[#0b1221] text-white pt-24 pb-12 rounded-t-[40px] relative overflow-hidden">
+    <!-- Subtle glow behind footer -->
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/[0.03] to-transparent pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 relative z-10">
+      
+      <!-- Brand column -->
+      <div class="lg:col-span-4 flex flex-col">
+        <img src="/Logo-black.png" alt="The Saints Center" class="h-[84px] w-auto mb-5 object-contain object-left pointer-events-none select-none" />
+        <p class="font-sans text-[#a0a0a0] text-[15px] leading-relaxed max-w-[300px] font-normal mb-auto">
+          "A digital sanctuary for the modern believer. Built for depth, dedicated to truth in the master's name."
+          <br /><br />
+          <span class="text-[#d47a22] font-semibold italic drop-shadow-sm">– Habakkuk 2:14</span>
+        </p>
+      </div>
+
+      <!-- Service Times -->
+      <div class="lg:col-span-3 lg:col-start-6">
+        <h4 class="font-sans font-bold text-[#d47a22] text-[13px] mb-6 tracking-widest uppercase flex items-center gap-2">
+          <i class="pi pi-calendar-times text-[10px]"></i>
+          Service Times
+        </h4>
+        <ul class="space-y-5">
+          <li v-for="service in serviceTimes" :key="service.day" class="flex items-start gap-3 opacity-90 hover:opacity-100 transition-opacity">
+            <i :class="['pi', service.icon, 'text-[#d47a22] text-[11px] mt-1 relative top-[2px]']"></i>
+            <div class="flex flex-col">
+              <span class="font-sans text-white text-[14px] font-bold mb-0.5 tracking-wide">{{ service.day }}</span>
+              <span class="font-sans text-[#a0a0a0] text-[13px] font-normal">{{ service.time }}</span>
             </div>
-          </div>
-          <p class="text-wisteria text-sm leading-relaxed">
-            The Citadel of Revelation and Power. A vibrant community of believers committed to raising messengers for the Kingdom.
-          </p>
-        </div>
+          </li>
+        </ul>
+      </div>
 
-        <div>
-          <h4 class="font-semibold text-bronze mb-4 text-sm tracking-wider uppercase">Quick Links</h4>
-          <ul class="space-y-3">
-            <li v-for="link in quickLinks" :key="link.to">
-              <router-link :to="link.to" class="text-wisteria text-sm hover:text-ghost transition-colors duration-300">
-                {{ link.label }}
-              </router-link>
-            </li>
-          </ul>
-        </div>
+      <!-- Community -->
+      <div class="lg:col-span-2 lg:col-start-9 w-full">
+        <h4 class="font-sans font-bold text-[#d47a22] text-[13px] mb-6 tracking-widest uppercase flex items-center gap-2">
+          <i class="pi pi-users text-[10px]"></i>
+          Community
+        </h4>
+        <ul class="space-y-4">
+          <li v-for="link in communityLinks" :key="link.name">
+            <router-link :to="link.to" class="font-sans text-[14px] text-[#a0a0a0] font-normal hover:text-white transition-colors group flex items-center gap-2">
+              <i :class="['pi', link.icon, 'text-[#d47a22] text-[10px] opacity-70 group-hover:opacity-100 transition-opacity']"></i>
+              <span class="relative">
+                {{ link.name }}
+                <span class="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+              </span>
+            </router-link>
+          </li>
+        </ul>
+      </div>
 
-        <div>
-          <h4 class="font-semibold text-bronze mb-4 text-sm tracking-wider uppercase">Service Times</h4>
-          <ul class="space-y-3 text-sm text-wisteria">
-            <li class="flex items-start gap-2">
-              <i class="pi pi-calendar text-bronze mt-0.5"></i>
-              <div>
-                <span class="text-ghost block">Sunday Service</span>
-                8:00 AM - 10:30 AM
+      <!-- Connect (Merged Icons + Text) -->
+      <div class="lg:col-span-2 lg:col-start-11 w-full pl-0 lg:pl-4">
+        <h4 class="font-sans font-bold text-[#d47a22] text-[13px] mb-6 tracking-widest uppercase flex items-center gap-2">
+          <i class="pi pi-link text-[10px]"></i>
+          Connect
+        </h4>
+        <ul class="space-y-4">
+          <li v-for="link in connectLinks" :key="link.name">
+            <a :href="link.to" class="font-sans text-[14px] text-[#a0a0a0] font-normal hover:text-white transition-colors group flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/60 group-hover:bg-[#d47a22] group-hover:border-[#d47a22] group-hover:text-white transition-all duration-300 transform group-hover:scale-110">
+                 <i :class="['pi', link.icon, 'text-[11px]']"></i>
               </div>
-            </li>
-            <li class="flex items-start gap-2">
-              <i class="pi pi-calendar text-bronze mt-0.5"></i>
-              <div>
-                <span class="text-ghost block">Wednesday Bible Study</span>
-                6:00 PM - 7:30 PM
-              </div>
-            </li>
-            <li class="flex items-start gap-2">
-              <i class="pi pi-calendar text-bronze mt-0.5"></i>
-              <div>
-                <span class="text-ghost block">Friday Prayer Meeting</span>
-                6:00 PM - 8:00 PM
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="font-semibold text-bronze mb-4 text-sm tracking-wider uppercase">Contact</h4>
-          <ul class="space-y-3 text-sm text-wisteria">
-            <li class="flex items-start gap-2">
-              <i class="pi pi-map-marker text-bronze mt-0.5"></i>
-              <span>Iba, Lagos State, Nigeria</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <i class="pi pi-phone text-bronze mt-0.5"></i>
-              <span>+234 XXX XXX XXXX</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <i class="pi pi-envelope text-bronze mt-0.5"></i>
-              <span>info@thesaintscenter.org</span>
-            </li>
-          </ul>
-          <div class="flex gap-3 mt-5">
-            <a v-for="social in socials" :key="social.icon" href="#" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-wisteria hover:bg-bronze hover:text-ghost hover:border-bronze transition-all duration-300">
-              <i :class="`pi pi-${social.icon} text-sm`"></i>
+              <span class="relative">
+                {{ link.name }}
+              </span>
             </a>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
 
-      <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p class="text-wisteria text-xs">&copy; {{ new Date().getFullYear() }} The Saints Center. All rights reserved.</p>
-        <p class="text-wisteria/50 text-xs">The Citadel of Revelation and Power</p>
-      </div>
+    </div>
+    
+    <!-- Centralized Copyright -->
+    <div class="max-w-6xl mx-auto px-6 mt-20 pt-8 border-t border-white/5 relative z-10 flex flex-col items-center text-center">
+       <p class="font-sans text-[#808080] text-[12px] font-light mb-2">
+         &copy; {{ new Date().getFullYear() }} The Saints Center. All rights reserved.
+       </p>
+       <p class="font-sans text-[#555555] text-[10px] uppercase tracking-[0.4em] font-bold">
+         Built for the master's use
+       </p>
     </div>
   </footer>
 </template>
-
-<script setup>
-const quickLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/sermons', label: 'Sermons' },
-  { to: '/programmes', label: 'Programmes' },
-  { to: '/contact', label: 'Contact Us' }
-]
-
-const socials = [
-  { icon: 'facebook' },
-  { icon: 'instagram' },
-  { icon: 'twitter' },
-  { icon: 'youtube' }
-]
-</script>

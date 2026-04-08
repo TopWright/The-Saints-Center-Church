@@ -10,7 +10,7 @@ const navLinks = [
 </script>
 
 <template>
-  <nav class="fixed top-4 left-0 right-0 z-[100]">
+  <nav class="fixed top-4 left-0 right-0 z-100">
     <div class="max-w-6xl mx-auto px-6 flex items-center justify-between bg-white/70 backdrop-blur-md shadow-sm border border-white/40 py-3 rounded-full">
       
       <!-- Logo -->

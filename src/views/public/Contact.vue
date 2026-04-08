@@ -85,7 +85,7 @@
           <div class="rounded-[32px] overflow-hidden min-h-[250px] bg-[#0b1221] relative shadow-lg group border border-[#1e2e4f]">
             <div class="absolute inset-0 bg-[url('https://snazzy-maps-cdn.azureedge.net/assets/151-ultra-light-with-labels.png?v=20170626083204')] bg-cover bg-center opacity-40 grayscale invert filter group-hover:scale-105 transition-transform duration-1000"></div>
             
-            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(11,18,33,0.9)] via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-linear-to-t from-[rgba(11,18,33,0.9)] via-transparent to-transparent"></div>
             
             <!-- Map marker ping -->
             <div class="absolute top-[40%] left-[35%] w-3 h-3 bg-[#d47a22] rounded-full shadow-[0_0_10px_#d47a22]">

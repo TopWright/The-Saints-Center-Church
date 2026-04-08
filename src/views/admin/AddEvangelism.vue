@@ -109,7 +109,7 @@
                   :class="values.tempContact?.filledWithSpirit ? 'bg-[#10b981] border-[#10b981] text-white shadow-lg' : 'bg-white border-[#f0f2f5] text-[#0b1221] hover:border-[#10b981]/30 shadow-sm'"
                 >
                   <i class="pi pi-sparkles text-sm" :class="values.tempContact?.filledWithSpirit ? 'text-white' : 'text-[#10b981]'"></i>
-                  <span class="text-[11px] font-bold uppercase tracking-[0.1em]">Spirit Filled</span>
+                  <span class="text-[11px] font-bold uppercase tracking-widest">Spirit Filled</span>
                 </button>
 
                 <button 
@@ -119,7 +119,7 @@
                   :class="values.tempContact?.healed ? 'bg-[#d47a22] border-[#d47a22] text-white shadow-lg' : 'bg-white border-[#f0f2f5] text-[#0b1221] hover:border-[#d47a22]/30 shadow-sm'"
                 >
                   <i class="pi pi-heart text-sm" :class="values.tempContact?.healed ? 'text-white' : 'text-[#d47a22]'"></i>
-                  <span class="text-[11px] font-bold uppercase tracking-[0.1em]">Healed</span>
+                  <span class="text-[11px] font-bold uppercase tracking-widest">Healed</span>
                 </button>
               </div>
               

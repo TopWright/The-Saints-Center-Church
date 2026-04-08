@@ -2,12 +2,12 @@
   <div class="group bg-white rounded-[40px] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 hover:shadow-[0_20px_50px_rgb(0,0,0,0.12)] hover:-translate-y-2 transition-all duration-500 cursor-pointer flex flex-col p-4 pb-6">
     
     <!-- Image Wrapper -->
-    <div class="w-full aspect-[16/10] bg-[#f0f0f0] rounded-[32px] relative overflow-hidden mb-6">
+    <div class="w-full aspect-16/10 bg-[#f0f0f0] rounded-[32px] relative overflow-hidden mb-6">
       <div 
         class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
         :style="{ backgroundImage: `url(${sermon.image || 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=2070&auto=format&fit=crop'})` }"
       ></div>
-      <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <div class="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       
       <!-- Duration Badge -->
       <div class="absolute top-4 right-4 bg-black/40 backdrop-blur-md text-white text-[10px] font-sans font-bold px-3 py-1.5 rounded-full z-10">

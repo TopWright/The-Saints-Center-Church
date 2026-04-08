@@ -192,7 +192,7 @@
         <div class="bg-white rounded-[40px] p-10 border-2 border-[#f0f2f5] shadow-xl relative overflow-hidden text-center group">
           <i class="pi pi-quote-right absolute -right-4 -bottom-4 text-9xl text-[#f0f2f5] group-hover:scale-110 transition-transform"></i>
           <h3 class="font-display text-xl font-bold text-[#0b1221] mb-6 border-b-2 border-[#f0f2f5] pb-4 uppercase tracking-widest inline-block mx-auto">Ministry Vision</h3>
-          <p class="font-display text-[18px] text-[#0b1221]/70 italic leading-relaxed relative z-10 italic">
+          <p class="font-display text-[18px] text-[#0b1221]/70 leading-relaxed relative z-10 italic">
             "To see every heart in the Western District ignited by the fire of the sanctuary, bringing healing to the broken and hope to the forgotten."
           </p>
         </div>

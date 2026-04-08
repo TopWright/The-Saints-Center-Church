@@ -15,7 +15,7 @@
         </h1>
         <div class="flex items-center gap-3 mt-4">
           <p class="font-sans text-[11px] text-[#a0a0a0] font-bold uppercase tracking-widest">Lead Evangelist</p>
-          <div class="w-6 h-[1px] bg-[#e0e0e0]"></div>
+          <div class="w-6 h-px bg-[#e0e0e0]"></div>
           <p class="font-sans text-[13px] text-[#d47a22] font-bold">{{ details.leadEvangelist }}</p>
         </div>
       </div>
@@ -31,7 +31,7 @@
     <!-- Stats Row -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="bg-[#f8f9fa] rounded-[40px] p-8 relative overflow-hidden group">
-        <i class="pi pi-users absolute right-4 top-4 text-[120px] text-black/[0.03] group-hover:scale-110 transition-transform duration-700"></i>
+        <i class="pi pi-users absolute right-4 top-4 text-[120px] text-black/3 group-hover:scale-110 transition-transform duration-700"></i>
         <div class="w-10 h-10 rounded-full bg-[#d47a22]/10 text-[#d47a22] flex items-center justify-center mb-6">
           <i class="pi pi-users"></i>
         </div>
@@ -40,7 +40,7 @@
       </div>
 
       <div class="bg-[#f8f9fa] rounded-[40px] p-8 relative overflow-hidden group">
-        <i class="pi pi-sparkles absolute right-4 top-4 text-[120px] text-black/[0.03] group-hover:scale-110 transition-transform duration-700"></i>
+        <i class="pi pi-sparkles absolute right-4 top-4 text-[120px] text-black/3 group-hover:scale-110 transition-transform duration-700"></i>
         <div class="w-10 h-10 rounded-full bg-[#10b981]/10 text-[#10b981] flex items-center justify-center mb-6">
           <i class="pi pi-sparkles"></i>
         </div>
@@ -49,7 +49,7 @@
       </div>
 
       <div class="bg-[#f8f9fa] rounded-[40px] p-8 relative overflow-hidden group">
-        <i class="pi pi-heart absolute right-4 top-4 text-[120px] text-black/[0.03] group-hover:scale-110 transition-transform duration-700"></i>
+        <i class="pi pi-heart absolute right-4 top-4 text-[120px] text-black/3 group-hover:scale-110 transition-transform duration-700"></i>
         <div class="w-10 h-10 rounded-full bg-[#ef4444]/10 text-[#ef4444] flex items-center justify-center mb-6">
           <i class="pi pi-heart"></i>
         </div>
@@ -62,7 +62,7 @@
     <div>
       <div class="flex items-center gap-6 mb-8">
         <h2 class="font-display text-3xl font-bold text-[#0b1221]">Encounter Chronicles</h2>
-        <div class="flex-1 h-[1px] bg-[#f0f2f5]"></div>
+        <div class="flex-1 h-px bg-[#f0f2f5]"></div>
       </div>
 
       <!-- Accordion -->
@@ -114,7 +114,7 @@
               <!-- Large Portrait -->
               <div class="w-full lg:w-64 aspect-square rounded-[30px] overflow-hidden shrink-0 shadow-lg relative">
                 <img :src="person.avatar" class="w-full h-full object-cover bg-[#f0f2f5]" />
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0b1221] to-transparent opacity-60"></div>
+                <div class="absolute inset-0 bg-linear-to-t from-[#0b1221] to-transparent opacity-60"></div>
                 <div class="absolute bottom-6 left-6 text-white">
                   <h3 class="font-display text-2xl font-bold mb-1">{{ person.name }}</h3>
                   <p class="text-[9px] uppercase tracking-widest font-bold opacity-70">Evangelism Contact</p>

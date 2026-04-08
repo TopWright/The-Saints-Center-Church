@@ -3,10 +3,10 @@
     <div class="max-w-7xl mx-auto px-4 md:px-6">
       
       <!-- Sermons Hero Banner -->
-      <div class="bg-gradient-to-br from-[#0c1322] to-[#152340] rounded-[40px] px-8 md:px-16 py-20 md:py-32 relative overflow-hidden flex flex-col md:flex-row items-center justify-between shadow-2xl">
+      <div class="bg-linear-to-br from-[#0c1322] to-[#152340] rounded-[40px] px-8 md:px-16 py-20 md:py-32 relative overflow-hidden flex flex-col md:flex-row items-center justify-between shadow-2xl">
         <!-- Subtle background overlay -->
         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1548624149-f9b1859aa7d0?q=80&w=2000&auto=format&fit=crop')] opacity-[0.03] mix-blend-overlay bg-cover bg-center"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-[#0b1221] via-[#0b1221]/90 to-transparent"></div>
+        <div class="absolute inset-0 bg-linear-to-r from-[#0b1221] via-[#0b1221]/90 to-transparent"></div>
 
         <!-- Left Content -->
         <div class="relative z-10 max-w-2xl">
@@ -24,7 +24,7 @@
         </div>
 
         <!-- Right Sparkle Graphic -->
-        <div class="relative z-10 hidden lg:flex items-center justify-center w-[350px] h-[350px] rounded-full border border-white/5 bg-white/5 backdrop-blur-sm shadow-[inset_0_0_50px_rgba(255,255,255,0.02)] mr-10 relative overflow-hidden group">
+        <div class="relative z-10 hidden lg:flex items-center justify-center w-[350px] h-[350px] rounded-full border border-white/5 bg-white/5 backdrop-blur-sm shadow-[inset_0_0_50px_rgba(255,255,255,0.02)] mr-10 overflow-hidden group">
            <!-- Inner glow spinning orbit -->
            <div class="absolute inset-0 rounded-full border border-[#d47a22]/30 scale-90 border-dashed animate-[spin_60s_linear_infinite]"></div>
            <i class="pi pi-sparkles text-white text-[70px] mix-blend-overlay opacity-80 group-hover:scale-110 transition-transform duration-700 pointer-events-none drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]"></i>

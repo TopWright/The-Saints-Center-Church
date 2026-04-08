@@ -6,7 +6,7 @@
       <!-- Background Image with Fade -->
       <div class="absolute inset-0 top-0 left-0 right-0 h-[600px] z-0">
         <div class="absolute inset-0 bg-white/80 z-10 block backdrop-blur-[2px]"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white z-20"></div>
+        <div class="absolute inset-0 bg-linear-to-b from-transparent via-white/50 to-white z-20"></div>
         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1548624149-f9b1859aa7d0?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat opacity-40 mix-blend-multiply"></div>
       </div>
 
@@ -132,7 +132,7 @@
           <!-- Conclave (Col Span 2) -->
           <div class="lg:col-span-2 rounded-[32px] overflow-hidden relative shadow-md group cursor-pointer min-h-[250px]">
             <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://images.unsplash.com/photo-1470229722913-7c090be5ae01?auto=format&fit=crop&q=80&w=2070');"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0b1221] via-[#0b1221]/60 to-transparent"></div>
+            <div class="absolute inset-0 bg-linear-to-t from-[#0b1221] via-[#0b1221]/60 to-transparent"></div>
             
             <div class="absolute bottom-0 left-0 p-8 w-full">
               <span class="bg-[#d47a22] text-white text-[9px] font-bold tracking-widest px-3 py-1 rounded-sm uppercase mb-3 inline-block">Annual Convention</span>
@@ -163,7 +163,7 @@
           <!-- Worship Streams (Col Span 1) -->
           <div class="lg:col-span-1 border border-gray-100 bg-white rounded-[32px] p-8 shadow-sm flex flex-col hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden">
              <!-- top edge subtle color -->
-             <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d47a22] to-[#f4c89f]"></div>
+             <div class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-[#d47a22] to-[#f4c89f]"></div>
              <i class="pi pi-wave-pulse text-[#d47a22] text-xl mb-6"></i>
              <h3 class="font-display font-bold text-2xl text-[#1a1d20] mb-3">Worship Streams</h3>
              <p class="font-sans text-[#707070] text-[16px] leading-relaxed font-normal mb-8">

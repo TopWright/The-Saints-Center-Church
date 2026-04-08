@@ -22,7 +22,7 @@ const connectLinks = [
 <template>
   <footer class="bg-[#0b1221] text-white pt-24 pb-12 rounded-t-[40px] relative overflow-hidden">
     <!-- Subtle glow behind footer -->
-    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/[0.03] to-transparent pointer-events-none"></div>
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-white/3 to-transparent pointer-events-none"></div>
 
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 relative z-10">
       

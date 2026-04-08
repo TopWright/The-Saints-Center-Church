@@ -19,7 +19,7 @@
           <div v-for="month in monthlySummary" :key="month.name" class="flex items-center gap-3">
             <span class="text-sm text-wisteria w-12">{{ month.name }}</span>
             <div class="flex-1 h-6 bg-ghost rounded-lg overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-prussian to-bronze rounded-lg transition-all duration-500" :style="{ width: `${(month.value / 50) * 100}%` }"></div>
+              <div class="h-full bg-linear-to-r from-prussian to-bronze rounded-lg transition-all duration-500" :style="{ width: `${(month.value / 50) * 100}%` }"></div>
             </div>
             <span class="text-sm font-semibold text-onyx w-8 text-right">{{ month.value }}</span>
           </div>

@@ -74,11 +74,11 @@
 
           <div class="flex items-center gap-12 border-t-2 border-[#f0f2f5] pt-6">
             <div class="space-y-0.5">
-              <p class="text-[9px] font-bold text-[#a0a0a0] uppercase tracking-widest text-[#a0a0a0]">Reports</p>
+              <p class="text-[9px] font-bold  uppercase tracking-widest text-[#a0a0a0]">Reports</p>
               <p class="font-display text-lg font-bold text-[#0b1221]">{{ disciple.reports }}</p>
             </div>
             <div class="space-y-0.5">
-              <p class="text-[9px] font-bold text-[#a0a0a0] uppercase tracking-widest text-[#a0a0a0]">Souls</p>
+              <p class="text-[9px] font-bold uppercase tracking-widest text-[#a0a0a0]">Souls</p>
               <p class="font-display text-lg font-bold text-[#0b1221]">{{ disciple.souls }}</p>
             </div>
           </div>
@@ -117,7 +117,7 @@
       <div class="lg:col-span-4 space-y-8">
         <!-- Top Worker Card -->
         <div class="bg-white rounded-[40px] p-8 border-2 border-[#f0f2f5] shadow-md flex flex-col items-center text-center space-y-4">
-          <p class="text-[10px] uppercase font-bold text-[#a0a0a0] tracking-[0.2em] text-[#a0a0a0]">Top Worker This Month</p>
+          <p class="text-[10px] uppercase font-bold text-[#a0a0a0] tracking-[0.2em]">Top Worker This Month</p>
           <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-[#ff9f43]">
             <img src="/vector-profiles/4.png" class="w-full h-full object-cover" />
           </div>

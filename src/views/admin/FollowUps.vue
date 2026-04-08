@@ -120,7 +120,7 @@
             </div>
             <span v-if="value > 3" class="ml-3 text-[11px] font-bold text-[#a0a0a0] uppercase tracking-widest">+{{ value - 3 }} More</span>
             <span v-else-if="value === 0" class="text-[11px] font-bold text-[#a0a0a0] uppercase tracking-widest italic">None Added</span>
-            <span v-else class="ml-3 text-[11px] font-bold text-[#a0a0a0] uppercase tracking-widest text-[#d47a22]">{{ value }} Total</span>
+            <span v-else class="ml-3 text-[11px] font-bold uppercase tracking-widest text-[#d47a22]">{{ value }} Total</span>
           </div>
         </template>
 

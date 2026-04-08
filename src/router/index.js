@@ -31,6 +31,7 @@ const routes = [
       { path: 'follow-ups', name: 'FollowUps', component: () => import('@/views/admin/FollowUps.vue') },
       { path: 'follow-ups/add', name: 'AddFollowUp', component: () => import('@/views/admin/AddFollowUp.vue') },
       { path: 'disciples', name: 'Disciples', component: () => import('@/views/admin/Disciples.vue') },
+      { path: 'disciples/:id', name: 'DiscipleDetails', component: () => import('@/views/admin/DiscipleDetails.vue') },
       { path: 'reports', name: 'Reports', component: () => import('@/views/admin/Reports.vue') },
       { path: 'users', name: 'Users', component: () => import('@/views/admin/Users.vue') },
       { path: 'settings', name: 'Settings', component: () => import('@/views/admin/Settings.vue') }

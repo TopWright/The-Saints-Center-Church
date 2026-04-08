@@ -3,8 +3,8 @@
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
       <div class="space-y-3 max-w-[600px]">
-        <h1 class="font-display text-5xl md:text-6xl text-[#0b1221] leading-[0.9] tracking-tighter">
-          My <span class="text-[#0b1221]">Evangelism Logs</span>
+        <h1 class="font-display text-5xl md:text-6xl text-[#0b1221] leading-[0.85] tracking-tighter font-bold">
+          Evangelism<span class="text-[#0b1221]/30"> Logs</span>
         </h1>
         <p class="font-sans text-[15px] text-[#707070] font-medium tracking-tight leading-relaxed">
           A sacred record of your community outreach efforts. Track your journey of faith and every connection made.

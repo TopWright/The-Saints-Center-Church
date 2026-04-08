@@ -1,3 +1,14 @@
+<script setup>
+defineProps({
+  label: String,
+  value: [String, Number],
+  trend: String,
+  trendLabel: String,
+  subtitle: String,
+  dark: { type: Boolean, default: false }
+})
+</script>
+
 <template>
   <div 
     class="rounded-[40px] p-8 lg:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.05)] transition-all duration-500 hover:shadow-xl hover:-translate-y-1 group relative overflow-hidden h-full border border-[#f0f2f5]"
@@ -38,14 +49,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-defineProps({
-  label: String,
-  value: [String, Number],
-  trend: String,
-  trendLabel: String,
-  subtitle: String,
-  dark: { type: Boolean, default: false }
-})
-</script>

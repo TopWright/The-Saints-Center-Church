@@ -1,3 +1,19 @@
+<script setup>
+defineProps({
+  sermon: { type: Object, required: true }
+})
+
+const getCategoryIcon = (category) => {
+  const icons = {
+    'Revelation': 'pi-book',
+    'The Supernatural': 'pi-bolt',
+    'Pauline Prayers': 'pi-bookmark',
+    'Leadership': 'pi-crown'
+  }
+  return icons[category] || 'pi-bookmark'
+}
+</script>
+
 <template>
   <div class="group bg-white rounded-[40px] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 hover:shadow-[0_20px_50px_rgb(0,0,0,0.12)] hover:-translate-y-2 transition-all duration-500 cursor-pointer flex flex-col p-4 pb-6">
     
@@ -55,19 +71,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-defineProps({
-  sermon: { type: Object, required: true }
-})
-
-const getCategoryIcon = (category) => {
-  const icons = {
-    'Revelation': 'pi-book',
-    'The Supernatural': 'pi-bolt',
-    'Pauline Prayers': 'pi-bookmark',
-    'Leadership': 'pi-crown'
-  }
-  return icons[category] || 'pi-bookmark'
-}
-</script>

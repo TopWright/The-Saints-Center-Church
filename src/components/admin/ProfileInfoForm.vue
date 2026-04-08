@@ -1,3 +1,7 @@
+<script setup>
+// Props/Emits can be added for dynamic data
+</script>
+
 <template>
   <div class="bg-white rounded-[40px] p-8 lg:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-[#0b1221]/10 space-y-8">
     <div class="flex flex-col md:flex-row items-center gap-8">
@@ -50,7 +54,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-// Props/Emits can be added for dynamic data
-</script>

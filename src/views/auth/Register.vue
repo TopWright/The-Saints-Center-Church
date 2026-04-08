@@ -1,3 +1,70 @@
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import gsap from 'gsap'
+
+const router = useRouter()
+const loading = ref(false)
+
+const form = ref({
+  avatar: 1,
+  fullName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+  role: 'member',
+  position: '',
+  supervisor: ''
+})
+
+onMounted(() => {
+  gsap.from('.reg-anim', {
+    y: 40,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.08,
+    ease: 'power3.out'
+  })
+})
+
+const createRipple = (event) => {
+  const button = event.currentTarget
+  const container = button.querySelector('.ripple-container')
+  
+  const circle = document.createElement('span')
+  const diameter = Math.max(button.clientWidth, button.clientHeight)
+  const radius = diameter / 2
+  
+  const rect = button.getBoundingClientRect()
+  
+  circle.style.width = circle.style.height = `${diameter}px`
+  circle.style.left = `${event.clientX - rect.left - radius}px`
+  circle.style.top = `${event.clientY - rect.top - radius}px`
+  circle.classList.add('animate-ripple', 'absolute', 'rounded-full', 'bg-white/30')
+  
+  container.appendChild(circle)
+  
+  setTimeout(() => circle.remove(), 800)
+}
+
+const handleRegister = async () => {
+  loading.value = true
+  
+  gsap.to('.reg-anim', {
+    y: -20,
+    opacity: 0,
+    duration: 0.5,
+    stagger: 0.04,
+    ease: 'power2.in',
+    onComplete: () => {
+      setTimeout(() => {
+        router.push('/auth/login')
+      }, 400)
+    }
+  })
+}
+</script>
+
 <template>
   <div class="w-full max-w-[850px] bg-white/90 backdrop-blur-3xl rounded-[60px] p-10 md:p-14 shadow-[0_40px_100px_rgba(0,0,0,0.08)] flex flex-col items-center">
     
@@ -158,70 +225,3 @@
     </form>
   </div>
 </template>
-
-<script setup>
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import gsap from 'gsap'
-
-const router = useRouter()
-const loading = ref(false)
-
-const form = ref({
-  avatar: 1,
-  fullName: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-  role: 'member',
-  position: '',
-  supervisor: ''
-})
-
-onMounted(() => {
-  gsap.from('.reg-anim', {
-    y: 40,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.08,
-    ease: 'power3.out'
-  })
-})
-
-const createRipple = (event) => {
-  const button = event.currentTarget
-  const container = button.querySelector('.ripple-container')
-  
-  const circle = document.createElement('span')
-  const diameter = Math.max(button.clientWidth, button.clientHeight)
-  const radius = diameter / 2
-  
-  const rect = button.getBoundingClientRect()
-  
-  circle.style.width = circle.style.height = `${diameter}px`
-  circle.style.left = `${event.clientX - rect.left - radius}px`
-  circle.style.top = `${event.clientY - rect.top - radius}px`
-  circle.classList.add('animate-ripple', 'absolute', 'rounded-full', 'bg-white/30')
-  
-  container.appendChild(circle)
-  
-  setTimeout(() => circle.remove(), 800)
-}
-
-const handleRegister = async () => {
-  loading.value = true
-  
-  gsap.to('.reg-anim', {
-    y: -20,
-    opacity: 0,
-    duration: 0.5,
-    stagger: 0.04,
-    ease: 'power2.in',
-    onComplete: () => {
-      setTimeout(() => {
-        router.push('/auth/login')
-      }, 400)
-    }
-  })
-}
-</script>

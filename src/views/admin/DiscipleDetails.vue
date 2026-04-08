@@ -1,3 +1,38 @@
+<script setup>
+const activities = [
+  { 
+    icon: 'pi pi-megaphone', 
+    title: 'Street Outreach - Downtown Core', 
+    time: '2 hours ago', 
+    description: 'Led a team of 5 disciples for the weekly evening outreach. Focused on the transit hub area. Encouraging conversations with 12 individuals.',
+    team: true
+  },
+  { 
+    icon: 'pi pi-book', 
+    title: 'Curriculum Review: Phase II', 
+    time: 'Yesterday', 
+    description: 'Updated the \'Foundation of Faith\' manual with new regional testimonies and historical context for the upcoming autumn cohort.'
+  },
+  { 
+    icon: 'pi pi-heart', 
+    title: 'Healing Testimony Logged', 
+    time: '3 days ago', 
+    description: 'Documented a miraculous recovery from chronic respiratory distress following the Friday Vigil. Medical confirmation pending.'
+  }
+]
+
+const milestones = [
+  { title: 'Disciple Training Level 3', status: 'completed' },
+  { title: 'Strategic Ministry Management', status: 'in-progress' },
+  { title: 'Regional Overseer Track', status: 'up-next' }
+]
+
+const teams = [
+  { name: 'Outreach Alpha', members: 12, icon: 'pi pi-users' },
+  { name: 'Curriculum Design', members: 4, icon: 'pi pi-pencil' }
+]
+</script>
+
 <template>
   <div class="space-y-12 max-w-[1200px] mx-auto pb-20 px-4 sm:px-0">
     <!-- Breadcrumb Header -->
@@ -216,41 +251,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-const activities = [
-  { 
-    icon: 'pi pi-megaphone', 
-    title: 'Street Outreach - Downtown Core', 
-    time: '2 hours ago', 
-    description: 'Led a team of 5 disciples for the weekly evening outreach. Focused on the transit hub area. Encouraging conversations with 12 individuals.',
-    team: true
-  },
-  { 
-    icon: 'pi pi-book', 
-    title: 'Curriculum Review: Phase II', 
-    time: 'Yesterday', 
-    description: 'Updated the \'Foundation of Faith\' manual with new regional testimonies and historical context for the upcoming autumn cohort.'
-  },
-  { 
-    icon: 'pi pi-heart', 
-    title: 'Healing Testimony Logged', 
-    time: '3 days ago', 
-    description: 'Documented a miraculous recovery from chronic respiratory distress following the Friday Vigil. Medical confirmation pending.'
-  }
-]
-
-const milestones = [
-  { title: 'Disciple Training Level 3', status: 'completed' },
-  { title: 'Strategic Ministry Management', status: 'in-progress' },
-  { title: 'Regional Overseer Track', status: 'up-next' }
-]
-
-const teams = [
-  { name: 'Outreach Alpha', members: 12, icon: 'pi pi-users' },
-  { name: 'Curriculum Design', members: 4, icon: 'pi pi-pencil' }
-]
-</script>
 
 <style scoped>
 .animate-spin-slow {

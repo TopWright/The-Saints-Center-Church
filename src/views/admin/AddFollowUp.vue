@@ -1,3 +1,139 @@
+<script setup>
+import { ref } from 'vue'
+import { useForm, useFieldArray } from 'vee-validate'
+import * as yup from 'yup'
+import AppInput from '@/components/forms/AppInput.vue'
+import AppSelect from '@/components/forms/AppSelect.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const editingIndex = ref(null)
+
+const schema = yup.object().shape({
+  week: yup.string().required('Required'),
+  date: yup.string().required('Required'),
+  startTime: yup.string().required('Required'),
+  endTime: yup.string().required('Required'),
+  topic: yup.string().required('Teaching topic is required'),
+  generalNotes: yup.string(),
+  tempParticipant: yup.object().shape({
+    id: yup.string(),
+    progress: yup.string(),
+    notes: yup.string()
+  }),
+  participants: yup.array().of(
+    yup.object().shape({
+      id: yup.string().required(),
+      progress: yup.string().required(),
+      notes: yup.string()
+    })
+  ).min(1, 'Add at least one participant')
+})
+
+const { handleSubmit, values, setValues, setFieldValue, resetForm } = useForm({
+  validationSchema: schema,
+  initialValues: {
+    week: 'week-42',
+    date: new Date().toISOString().split('T')[0],
+    startTime: '10:30',
+    endTime: '12:00',
+    topic: '',
+    generalNotes: '',
+    tempParticipant: { id: '', progress: 'Growing', notes: '' },
+    participants: []
+  }
+})
+
+const { push, remove, update, fields } = useFieldArray('participants')
+
+const commitParticipant = () => {
+  const tp = JSON.parse(JSON.stringify(values.tempParticipant))
+  
+  if (!tp.id || !tp.progress) {
+    alert('Please select a participant and progress status')
+    return
+  }
+
+  if (editingIndex.value !== null) {
+    update(editingIndex.value, tp)
+    editingIndex.value = null
+  } else {
+    push(tp)
+  }
+
+  setValues({
+    ...values,
+    tempParticipant: { id: '', progress: 'Growing', notes: '' }
+  })
+}
+
+const editParticipant = (idx) => {
+  editingIndex.value = idx
+  const data = JSON.parse(JSON.stringify(fields.value[idx].value))
+  
+  setFieldValue('tempParticipant.id', data.id)
+  setFieldValue('tempParticipant.progress', data.progress)
+  setFieldValue('tempParticipant.notes', data.notes || '')
+}
+
+const cancelEdit = () => {
+  editingIndex.value = null
+  setValues({
+    ...values,
+    tempParticipant: { id: '', progress: 'Growing', notes: '' }
+  })
+}
+
+const finalizeSession = handleSubmit((formValues) => {
+  const existing = JSON.parse(localStorage.getItem('followup_sessions') || '[]')
+  
+  const newSession = {
+    id: Date.now().toString(),
+    date: formValues.date,
+    time: `${formValues.startTime} AM`, // Simplified
+    topic: formValues.topic,
+    participants: formValues.participants.length,
+    participantDetails: formValues.participants
+  }
+  
+  existing.unshift(newSession)
+  localStorage.setItem('followup_sessions', JSON.stringify(existing))
+  router.push('/admin/follow-ups')
+})
+
+const saveDraft = () => router.push('/admin/follow-ups')
+
+const weekOptions = [
+  { label: 'Week 42 - October 2024', value: 'week-42' },
+  { label: 'Week 43 - October 2024', value: 'week-43' }
+]
+
+const progressOptions = [
+  { label: 'New Converted', value: 'New' },
+  { label: 'Growing', value: 'Growing' },
+  { label: 'Established', value: 'Established' },
+  { label: 'Leadership Track', value: 'Leadership' }
+]
+
+const participantOptions = [
+  { label: 'Sarah Jenkins', value: 'sarah-1' },
+  { label: 'Ibrahim Musa', value: 'ibrahim-1' },
+  { label: 'Amara Eze', value: 'amara-1' },
+  { label: 'Tola Bakare', value: 'tola-1' }
+]
+
+const getParticipantName = (id) => participantOptions.find(p => p.value === id)?.label || 'Unknown'
+const getParticipantAvatar = (id) => {
+  const map = {
+    'sarah-1': '/vector-profiles/1.png',
+    'ibrahim-1': '/vector-profiles/2.png',
+    'amara-1': '/vector-profiles/3.png',
+    'tola-1': '/vector-profiles/4.png'
+  }
+  return map[id] || '/vector-profiles/10.png'
+}
+</script>
+
 <template>
   <div class="space-y-10 relative pb-20 max-w-[1000px] mx-auto px-4 sm:px-0">
     <!-- Header -->
@@ -206,142 +342,6 @@
     </form>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import { useForm, useFieldArray } from 'vee-validate'
-import * as yup from 'yup'
-import AppInput from '@/components/forms/AppInput.vue'
-import AppSelect from '@/components/forms/AppSelect.vue'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-const editingIndex = ref(null)
-
-const schema = yup.object().shape({
-  week: yup.string().required('Required'),
-  date: yup.string().required('Required'),
-  startTime: yup.string().required('Required'),
-  endTime: yup.string().required('Required'),
-  topic: yup.string().required('Teaching topic is required'),
-  generalNotes: yup.string(),
-  tempParticipant: yup.object().shape({
-    id: yup.string(),
-    progress: yup.string(),
-    notes: yup.string()
-  }),
-  participants: yup.array().of(
-    yup.object().shape({
-      id: yup.string().required(),
-      progress: yup.string().required(),
-      notes: yup.string()
-    })
-  ).min(1, 'Add at least one participant')
-})
-
-const { handleSubmit, values, setValues, setFieldValue, resetForm } = useForm({
-  validationSchema: schema,
-  initialValues: {
-    week: 'week-42',
-    date: new Date().toISOString().split('T')[0],
-    startTime: '10:30',
-    endTime: '12:00',
-    topic: '',
-    generalNotes: '',
-    tempParticipant: { id: '', progress: 'Growing', notes: '' },
-    participants: []
-  }
-})
-
-const { push, remove, update, fields } = useFieldArray('participants')
-
-const commitParticipant = () => {
-  const tp = JSON.parse(JSON.stringify(values.tempParticipant))
-  
-  if (!tp.id || !tp.progress) {
-    alert('Please select a participant and progress status')
-    return
-  }
-
-  if (editingIndex.value !== null) {
-    update(editingIndex.value, tp)
-    editingIndex.value = null
-  } else {
-    push(tp)
-  }
-
-  setValues({
-    ...values,
-    tempParticipant: { id: '', progress: 'Growing', notes: '' }
-  })
-}
-
-const editParticipant = (idx) => {
-  editingIndex.value = idx
-  const data = JSON.parse(JSON.stringify(fields.value[idx].value))
-  
-  setFieldValue('tempParticipant.id', data.id)
-  setFieldValue('tempParticipant.progress', data.progress)
-  setFieldValue('tempParticipant.notes', data.notes || '')
-}
-
-const cancelEdit = () => {
-  editingIndex.value = null
-  setValues({
-    ...values,
-    tempParticipant: { id: '', progress: 'Growing', notes: '' }
-  })
-}
-
-const finalizeSession = handleSubmit((formValues) => {
-  const existing = JSON.parse(localStorage.getItem('followup_sessions') || '[]')
-  
-  const newSession = {
-    id: Date.now().toString(),
-    date: formValues.date,
-    time: `${formValues.startTime} AM`, // Simplified
-    topic: formValues.topic,
-    participants: formValues.participants.length,
-    participantDetails: formValues.participants
-  }
-  
-  existing.unshift(newSession)
-  localStorage.setItem('followup_sessions', JSON.stringify(existing))
-  router.push('/admin/follow-ups')
-})
-
-const saveDraft = () => router.push('/admin/follow-ups')
-
-const weekOptions = [
-  { label: 'Week 42 - October 2024', value: 'week-42' },
-  { label: 'Week 43 - October 2024', value: 'week-43' }
-]
-
-const progressOptions = [
-  { label: 'New Converted', value: 'New' },
-  { label: 'Growing', value: 'Growing' },
-  { label: 'Established', value: 'Established' },
-  { label: 'Leadership Track', value: 'Leadership' }
-]
-
-const participantOptions = [
-  { label: 'Sarah Jenkins', value: 'sarah-1' },
-  { label: 'Ibrahim Musa', value: 'ibrahim-1' },
-  { label: 'Amara Eze', value: 'amara-1' },
-  { label: 'Tola Bakare', value: 'tola-1' }
-]
-
-const getParticipantName = (id) => participantOptions.find(p => p.value === id)?.label || 'Unknown'
-const getParticipantAvatar = (id) => {
-  const map = {
-    'sarah-1': '/vector-profiles/1.png',
-    'ibrahim-1': '/vector-profiles/2.png',
-    'amara-1': '/vector-profiles/3.png',
-    'tola-1': '/vector-profiles/4.png'
-  }
-  return map[id] || '/vector-profiles/10.png'
-}
-</script>
 
 <style scoped>
 input[type="date"], input[type="time"] {

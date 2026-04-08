@@ -1,3 +1,131 @@
+<script setup>
+import { ref } from 'vue'
+import { useForm, useFieldArray } from 'vee-validate'
+import * as yup from 'yup'
+import AppInput from '@/components/forms/AppInput.vue'
+import AppSelect from '@/components/forms/AppSelect.vue'
+import AppToggle from '@/components/forms/AppToggle.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const editingIndex = ref(null)
+
+const schema = yup.object().shape({
+  week: yup.string().required('Required'),
+  evangelist: yup.string().required('Required'),
+  notes: yup.string(),
+  tempContact: yup.object().shape({
+    fullName: yup.string(),
+    phone: yup.string(),
+    address: yup.string(),
+    filledWithSpirit: yup.boolean(),
+    healed: yup.boolean(),
+    healingDescription: yup.string()
+  }),
+  contacts: yup.array().of(
+    yup.object().shape({
+      fullName: yup.string().required('Name is required'),
+      phone: yup.string().required('Phone is required'),
+      address: yup.string().required('Address is required'),
+      filledWithSpirit: yup.boolean(),
+      healed: yup.boolean(),
+      healingDescription: yup.string()
+    })
+  ).min(1, 'Add at least one contact to the ledger')
+})
+
+const { handleSubmit, values, setValues, setFieldValue, resetForm } = useForm({
+  validationSchema: schema,
+  initialValues: {
+    week: 'oct-23',
+    evangelist: 'johnathan-wright',
+    notes: '',
+    tempContact: { fullName: '', phone: '', address: '', filledWithSpirit: false, healed: false, healingDescription: '' },
+    contacts: []
+  }
+})
+
+const { push, remove, update, fields } = useFieldArray('contacts')
+
+const commitContact = async () => {
+  // Use a deep copy to ensure reactivity is broken and data is fresh
+  const tc = JSON.parse(JSON.stringify(values.tempContact))
+  
+  if (!tc.fullName || !tc.phone || !tc.address) {
+    alert('Please fill in Name, Phone, and Address')
+    return
+  }
+
+  if (editingIndex.value !== null) {
+    update(editingIndex.value, tc)
+    editingIndex.value = null
+  } else {
+    push(tc)
+  }
+
+  // Clear temp contact but keep session identity
+  setValues({
+    ...values,
+    tempContact: { fullName: '', phone: '', address: '', filledWithSpirit: false, healed: false, healingDescription: '' }
+  })
+}
+
+const editContact = (idx) => {
+  editingIndex.value = idx
+  // Use fields.value to access the reactive array correctly
+  const contactData = JSON.parse(JSON.stringify(fields.value[idx].value))
+  
+  // Directly set each field to ensure prefilling triggers reactivity correctly
+  setFieldValue('tempContact.fullName', contactData.fullName)
+  setFieldValue('tempContact.phone', contactData.phone)
+  setFieldValue('tempContact.address', contactData.address)
+  setFieldValue('tempContact.filledWithSpirit', !!contactData.filledWithSpirit)
+  setFieldValue('tempContact.healed', !!contactData.healed)
+  setFieldValue('tempContact.healingDescription', contactData.healingDescription || '')
+}
+
+const cancelEdit = () => {
+  editingIndex.value = null
+  setValues({
+    ...values,
+    tempContact: { fullName: '', phone: '', address: '', filledWithSpirit: false, healed: false, healingDescription: '' }
+  })
+}
+
+const saveDraft = () => {
+  router.push('/admin/evangelism')
+}
+
+const finalizeReport = handleSubmit((formValues) => {
+  const existingLogs = JSON.parse(localStorage.getItem('evangelism_logs') || '[]')
+  
+  const newEntry = {
+    id: Date.now().toString(),
+    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+    time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+    contacts: formValues.contacts.length,
+    filledCount: formValues.contacts.filter(c => c.filledWithSpirit).length,
+    healedCount: formValues.contacts.filter(c => c.healed).length,
+    details: formValues.contacts
+  }
+  
+  existingLogs.unshift(newEntry)
+  localStorage.setItem('evangelism_logs', JSON.stringify(existingLogs))
+  
+  router.push('/admin/evangelism')
+})
+
+const weekOptions = [
+  { label: 'Oct 23 - Oct 29, 2023', value: 'oct-23' },
+  { label: 'Oct 30 - Nov 5, 2023', value: 'oct-30' }
+]
+
+const evangelistOptions = [
+  { label: 'Rev. Johnathan Wright', value: 'johnathan-wright' },
+  { label: 'Evang. Sarah Jenkins', value: 'sarah-jenkins' }
+]
+</script>
+
 <template>
   <div class="space-y-10 relative pb-20 max-w-[1000px] mx-auto px-4 sm:px-0">
     <!-- Header -->
@@ -214,131 +342,3 @@
     </form>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import { useForm, useFieldArray } from 'vee-validate'
-import * as yup from 'yup'
-import AppInput from '@/components/forms/AppInput.vue'
-import AppSelect from '@/components/forms/AppSelect.vue'
-import AppToggle from '@/components/forms/AppToggle.vue'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-const editingIndex = ref(null)
-
-const schema = yup.object().shape({
-  week: yup.string().required('Required'),
-  evangelist: yup.string().required('Required'),
-  notes: yup.string(),
-  tempContact: yup.object().shape({
-    fullName: yup.string(),
-    phone: yup.string(),
-    address: yup.string(),
-    filledWithSpirit: yup.boolean(),
-    healed: yup.boolean(),
-    healingDescription: yup.string()
-  }),
-  contacts: yup.array().of(
-    yup.object().shape({
-      fullName: yup.string().required('Name is required'),
-      phone: yup.string().required('Phone is required'),
-      address: yup.string().required('Address is required'),
-      filledWithSpirit: yup.boolean(),
-      healed: yup.boolean(),
-      healingDescription: yup.string()
-    })
-  ).min(1, 'Add at least one contact to the ledger')
-})
-
-const { handleSubmit, values, setValues, setFieldValue, resetForm } = useForm({
-  validationSchema: schema,
-  initialValues: {
-    week: 'oct-23',
-    evangelist: 'johnathan-wright',
-    notes: '',
-    tempContact: { fullName: '', phone: '', address: '', filledWithSpirit: false, healed: false, healingDescription: '' },
-    contacts: []
-  }
-})
-
-const { push, remove, update, fields } = useFieldArray('contacts')
-
-const commitContact = async () => {
-  // Use a deep copy to ensure reactivity is broken and data is fresh
-  const tc = JSON.parse(JSON.stringify(values.tempContact))
-  
-  if (!tc.fullName || !tc.phone || !tc.address) {
-    alert('Please fill in Name, Phone, and Address')
-    return
-  }
-
-  if (editingIndex.value !== null) {
-    update(editingIndex.value, tc)
-    editingIndex.value = null
-  } else {
-    push(tc)
-  }
-
-  // Clear temp contact but keep session identity
-  setValues({
-    ...values,
-    tempContact: { fullName: '', phone: '', address: '', filledWithSpirit: false, healed: false, healingDescription: '' }
-  })
-}
-
-const editContact = (idx) => {
-  editingIndex.value = idx
-  // Use fields.value to access the reactive array correctly
-  const contactData = JSON.parse(JSON.stringify(fields.value[idx].value))
-  
-  // Directly set each field to ensure prefilling triggers reactivity correctly
-  setFieldValue('tempContact.fullName', contactData.fullName)
-  setFieldValue('tempContact.phone', contactData.phone)
-  setFieldValue('tempContact.address', contactData.address)
-  setFieldValue('tempContact.filledWithSpirit', !!contactData.filledWithSpirit)
-  setFieldValue('tempContact.healed', !!contactData.healed)
-  setFieldValue('tempContact.healingDescription', contactData.healingDescription || '')
-}
-
-const cancelEdit = () => {
-  editingIndex.value = null
-  setValues({
-    ...values,
-    tempContact: { fullName: '', phone: '', address: '', filledWithSpirit: false, healed: false, healingDescription: '' }
-  })
-}
-
-const saveDraft = () => {
-  router.push('/admin/evangelism')
-}
-
-const finalizeReport = handleSubmit((formValues) => {
-  const existingLogs = JSON.parse(localStorage.getItem('evangelism_logs') || '[]')
-  
-  const newEntry = {
-    id: Date.now().toString(),
-    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-    time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
-    contacts: formValues.contacts.length,
-    filledCount: formValues.contacts.filter(c => c.filledWithSpirit).length,
-    healedCount: formValues.contacts.filter(c => c.healed).length,
-    details: formValues.contacts
-  }
-  
-  existingLogs.unshift(newEntry)
-  localStorage.setItem('evangelism_logs', JSON.stringify(existingLogs))
-  
-  router.push('/admin/evangelism')
-})
-
-const weekOptions = [
-  { label: 'Oct 23 - Oct 29, 2023', value: 'oct-23' },
-  { label: 'Oct 30 - Nov 5, 2023', value: 'oct-30' }
-]
-
-const evangelistOptions = [
-  { label: 'Rev. Johnathan Wright', value: 'johnathan-wright' },
-  { label: 'Evang. Sarah Jenkins', value: 'sarah-jenkins' }
-]
-</script>

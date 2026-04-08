@@ -1,10 +1,94 @@
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import DataTable from '@/components/admin/DataTable.vue'
+import AppModal from '@/components/shared/AppModal.vue'
+
+const searchQuery = ref('')
+const sessions = ref([])
+const showDetails = ref(false)
+const selectedSession = ref(null)
+
+const columns = [
+  { key: 'date', label: 'Date' },
+  { key: 'time', label: 'Time' },
+  { key: 'topic', label: 'Teaching Topic' },
+  { key: 'participants', label: 'Total Participants' },
+  { key: 'actions', label: '', class: 'w-[100px]' }
+]
+
+const MOCK_SESSIONS = [
+  { 
+    date: '2023-10-24', 
+    time: '1:30 HR', 
+    topic: 'Foundations of Grace', 
+    participants: 17,
+    notes: 'A deep dive into the redemptive power of grace. We had a great time of interaction and prayer.',
+    participantDetails: [
+      { id: 'sarah-1', name: 'Sarah Jenkins', progress: 'Growing', notes: 'Very attentive, asked good questions about faith.' },
+      { id: 'ibrahim-1', name: 'Ibrahim Musa', progress: 'New', notes: 'First time attendee, very open to the word.' }
+    ]
+  },
+  { 
+    date: '2023-10-21', 
+    time: '2:15 HR', 
+    topic: 'Servant Leadership Intro', 
+    participants: 9,
+    notes: 'Exploring the heart of a servant. Discussed practical ways to lead by serving others.'
+  },
+  { 
+    date: '2023-10-18', 
+    time: '1:00 HR', 
+    topic: 'Navigating Crisis & Hope', 
+    participants: 25,
+    notes: 'Encouraging one another in difficult times. Focused on the hope we have in Christ.'
+  }
+]
+
+const mockParticipantDetails = [
+  { name: 'Sarah Jenkins', progress: 'Growing', notes: 'Specific updates on her journey...' },
+  { name: 'Ibrahim Musa', progress: 'New', notes: 'Observations from the session...' }
+]
+
+onMounted(() => {
+  const local = JSON.parse(localStorage.getItem('followup_sessions') || '[]')
+  sessions.value = [...local, ...MOCK_SESSIONS]
+})
+
+const filteredSessions = computed(() => {
+  if (!searchQuery.value) return sessions.value
+  const q = searchQuery.value.toLowerCase()
+  return sessions.value.filter(s => s.topic.toLowerCase().includes(q))
+})
+
+const formatDate = (dateStr) => {
+  if (!dateStr) return ''
+  const d = new Date(dateStr)
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+}
+
+const openDetails = (session) => {
+  selectedSession.value = session
+  showDetails.value = true
+}
+
+const getParticipantName = (id) => {
+  const participantOptions = [
+    { label: 'Sarah Jenkins', value: 'sarah-1' },
+    { label: 'Ibrahim Musa', value: 'ibrahim-1' },
+    { label: 'Amara Eze', value: 'amara-1' },
+    { label: 'Tola Bakare', value: 'tola-1' }
+  ]
+  return participantOptions.find(p => p.value === id)?.label || 'Unknown'
+}
+</script>
+
 <template>
   <div class="space-y-10 relative pb-20 max-w-[1200px] mx-auto px-4 sm:px-0">
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
       <div class="space-y-4">
         <h1 class="font-display text-5xl md:text-6xl text-[#0b1221] leading-[0.85] tracking-tighter font-bold">
-          Follow-Up <span class="text-[#0b1221]/30">Sessions</span>
+          Follow-Up <span class="text-[#d47a22] font-display italic">Sessions</span>
         </h1>
         <p class="font-sans text-[15px] text-[#707070] font-medium tracking-tight max-w-[500px] leading-relaxed">
           Track and manage spiritual growth dialogues. Every session is a step toward deeper community and understanding.
@@ -274,87 +358,3 @@
     </AppModal>
   </div>
 </template>
-
-<script setup>
-import { ref, computed, onMounted } from 'vue'
-import DataTable from '@/components/admin/DataTable.vue'
-import AppModal from '@/components/shared/AppModal.vue'
-
-const searchQuery = ref('')
-const sessions = ref([])
-const showDetails = ref(false)
-const selectedSession = ref(null)
-
-const columns = [
-  { key: 'date', label: 'Date' },
-  { key: 'time', label: 'Time' },
-  { key: 'topic', label: 'Teaching Topic' },
-  { key: 'participants', label: 'Total Participants' },
-  { key: 'actions', label: '', class: 'w-[100px]' }
-]
-
-const MOCK_SESSIONS = [
-  { 
-    date: '2023-10-24', 
-    time: '1:30 HR', 
-    topic: 'Foundations of Grace', 
-    participants: 17,
-    notes: 'A deep dive into the redemptive power of grace. We had a great time of interaction and prayer.',
-    participantDetails: [
-      { id: 'sarah-1', name: 'Sarah Jenkins', progress: 'Growing', notes: 'Very attentive, asked good questions about faith.' },
-      { id: 'ibrahim-1', name: 'Ibrahim Musa', progress: 'New', notes: 'First time attendee, very open to the word.' }
-    ]
-  },
-  { 
-    date: '2023-10-21', 
-    time: '2:15 HR', 
-    topic: 'Servant Leadership Intro', 
-    participants: 9,
-    notes: 'Exploring the heart of a servant. Discussed practical ways to lead by serving others.'
-  },
-  { 
-    date: '2023-10-18', 
-    time: '1:00 HR', 
-    topic: 'Navigating Crisis & Hope', 
-    participants: 25,
-    notes: 'Encouraging one another in difficult times. Focused on the hope we have in Christ.'
-  }
-]
-
-const mockParticipantDetails = [
-  { name: 'Sarah Jenkins', progress: 'Growing', notes: 'Specific updates on her journey...' },
-  { name: 'Ibrahim Musa', progress: 'New', notes: 'Observations from the session...' }
-]
-
-onMounted(() => {
-  const local = JSON.parse(localStorage.getItem('followup_sessions') || '[]')
-  sessions.value = [...local, ...MOCK_SESSIONS]
-})
-
-const filteredSessions = computed(() => {
-  if (!searchQuery.value) return sessions.value
-  const q = searchQuery.value.toLowerCase()
-  return sessions.value.filter(s => s.topic.toLowerCase().includes(q))
-})
-
-const formatDate = (dateStr) => {
-  if (!dateStr) return ''
-  const d = new Date(dateStr)
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-}
-
-const openDetails = (session) => {
-  selectedSession.value = session
-  showDetails.value = true
-}
-
-const getParticipantName = (id) => {
-  const participantOptions = [
-    { label: 'Sarah Jenkins', value: 'sarah-1' },
-    { label: 'Ibrahim Musa', value: 'ibrahim-1' },
-    { label: 'Amara Eze', value: 'amara-1' },
-    { label: 'Tola Bakare', value: 'tola-1' }
-  ]
-  return participantOptions.find(p => p.value === id)?.label || 'Unknown'
-}
-</script>

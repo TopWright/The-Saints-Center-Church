@@ -1,3 +1,37 @@
+<script setup>
+import { computed, watch } from 'vue'
+
+const props = defineProps({
+  show: { type: Boolean, default: false },
+  title: { type: String, default: '' },
+  maxWidth: { type: String, default: 'md' }
+})
+
+const emit = defineEmits(['close'])
+
+const maxWidthClass = computed(() => {
+  return {
+    'sm': 'sm:max-w-sm',
+    'md': 'sm:max-w-md',
+    'lg': 'sm:max-w-lg',
+    'xl': 'sm:max-w-xl',
+    '2xl': 'sm:max-w-2xl',
+    '3xl': 'sm:max-w-3xl',
+    '4xl': 'sm:max-w-4xl',
+    '5xl': 'sm:max-w-5xl'
+  }[props.maxWidth] || 'sm:max-w-md'
+})
+
+// Prevent body scroll when modal is open
+watch(() => props.show, (newVal) => {
+  if (newVal) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+})
+</script>
+
 <template>
   <Teleport to="body">
     <Transition
@@ -53,37 +87,3 @@
     </Transition>
   </Teleport>
 </template>
-
-<script setup>
-import { computed, watch } from 'vue'
-
-const props = defineProps({
-  show: { type: Boolean, default: false },
-  title: { type: String, default: '' },
-  maxWidth: { type: String, default: 'md' }
-})
-
-const emit = defineEmits(['close'])
-
-const maxWidthClass = computed(() => {
-  return {
-    'sm': 'sm:max-w-sm',
-    'md': 'sm:max-w-md',
-    'lg': 'sm:max-w-lg',
-    'xl': 'sm:max-w-xl',
-    '2xl': 'sm:max-w-2xl',
-    '3xl': 'sm:max-w-3xl',
-    '4xl': 'sm:max-w-4xl',
-    '5xl': 'sm:max-w-5xl'
-  }[props.maxWidth] || 'sm:max-w-md'
-})
-
-// Prevent body scroll when modal is open
-watch(() => props.show, (newVal) => {
-  if (newVal) {
-    document.body.style.overflow = 'hidden'
-  } else {
-    document.body.style.overflow = ''
-  }
-})
-</script>

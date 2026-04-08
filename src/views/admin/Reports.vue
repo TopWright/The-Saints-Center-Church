@@ -1,3 +1,41 @@
+<script setup>
+import ReportStatCard from '@/components/admin/ReportStatCard.vue'
+import WeeklyGrowthChart from '@/components/admin/WeeklyGrowthChart.vue'
+import TeamEffortCard from '@/components/admin/TeamEffortCard.vue'
+import ReportSection from '@/components/admin/ReportSection.vue'
+import ExportButton from '@/components/admin/ExportButton.vue'
+import DataTable from '@/components/admin/DataTable.vue'
+
+const evangelismColumns = [
+  { key: 'date', label: 'Date' },
+  { key: 'minister', label: 'Minister' },
+  { key: 'location', label: 'Location' },
+  { key: 'preached', label: 'Preached', class: 'text-center' },
+  { key: 'decisions', label: 'Decisions', class: 'text-center' },
+  { key: 'healings', label: 'Healings', class: 'text-center' }
+]
+
+const evangelismRows = [
+  { date: 'Oct 27, 2023', minister: 'James Wilson', location: 'Central Park North', preached: 24, decisions: 8, healings: 2 },
+  { date: 'Oct 26, 2023', minister: 'Mary Adams', location: 'Starlight Plaza', preached: 12, decisions: 4, healings: 0 },
+  { date: 'Oct 25, 2023', minister: 'Sarah Kim', location: 'East District Mall', preached: 31, decisions: 11, healings: 5 }
+]
+
+const followUpColumns = [
+  { key: 'contactName', label: 'Contact Name' },
+  { key: 'workerAssigned', label: 'Worker Assigned' },
+  { key: 'sessionType', label: 'Session Type' },
+  { key: 'status', label: 'Status' },
+  { key: 'nextStep', label: 'Next Step' }
+]
+
+const followUpRows = [
+  { contactName: 'John Doe', workerAssigned: 'Pastor Samuel', sessionType: 'Discipleship 101', status: 'COMPLETED', nextStep: 'Assigned to Cell Group' },
+  { contactName: 'Jane Smith', workerAssigned: 'Mary Adams', sessionType: 'Home Visit', status: 'IN PROGRESS', nextStep: 'Water Baptism Scheduling' },
+  { contactName: 'Robert Brown', workerAssigned: 'Sarah Kim', sessionType: 'Counseling', status: 'SCHEDULED', nextStep: 'Initial Welcome Call' }
+]
+</script>
+
 <template>
   <div class="space-y-12 pb-20">
     <!-- Header Section -->
@@ -139,41 +177,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import ReportStatCard from '@/components/admin/ReportStatCard.vue'
-import WeeklyGrowthChart from '@/components/admin/WeeklyGrowthChart.vue'
-import TeamEffortCard from '@/components/admin/TeamEffortCard.vue'
-import ReportSection from '@/components/admin/ReportSection.vue'
-import ExportButton from '@/components/admin/ExportButton.vue'
-import DataTable from '@/components/admin/DataTable.vue'
-
-const evangelismColumns = [
-  { key: 'date', label: 'Date' },
-  { key: 'minister', label: 'Minister' },
-  { key: 'location', label: 'Location' },
-  { key: 'preached', label: 'Preached', class: 'text-center' },
-  { key: 'decisions', label: 'Decisions', class: 'text-center' },
-  { key: 'healings', label: 'Healings', class: 'text-center' }
-]
-
-const evangelismRows = [
-  { date: 'Oct 27, 2023', minister: 'James Wilson', location: 'Central Park North', preached: 24, decisions: 8, healings: 2 },
-  { date: 'Oct 26, 2023', minister: 'Mary Adams', location: 'Starlight Plaza', preached: 12, decisions: 4, healings: 0 },
-  { date: 'Oct 25, 2023', minister: 'Sarah Kim', location: 'East District Mall', preached: 31, decisions: 11, healings: 5 }
-]
-
-const followUpColumns = [
-  { key: 'contactName', label: 'Contact Name' },
-  { key: 'workerAssigned', label: 'Worker Assigned' },
-  { key: 'sessionType', label: 'Session Type' },
-  { key: 'status', label: 'Status' },
-  { key: 'nextStep', label: 'Next Step' }
-]
-
-const followUpRows = [
-  { contactName: 'John Doe', workerAssigned: 'Pastor Samuel', sessionType: 'Discipleship 101', status: 'COMPLETED', nextStep: 'Assigned to Cell Group' },
-  { contactName: 'Jane Smith', workerAssigned: 'Mary Adams', sessionType: 'Home Visit', status: 'IN PROGRESS', nextStep: 'Water Baptism Scheduling' },
-  { contactName: 'Robert Brown', workerAssigned: 'Sarah Kim', sessionType: 'Counseling', status: 'SCHEDULED', nextStep: 'Initial Welcome Call' }
-]
-</script>

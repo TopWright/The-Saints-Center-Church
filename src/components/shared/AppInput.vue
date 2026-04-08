@@ -1,3 +1,16 @@
+<script setup>
+defineProps({
+  modelValue: { type: String, default: '' },
+  type: { type: String, default: 'text' },
+  placeholder: { type: String, default: '' },
+  icon: { type: String, default: '' },
+  id: { type: String, default: '' },
+  disabled: { type: Boolean, default: false }
+})
+
+defineEmits(['update:modelValue'])
+</script>
+
 <template>
   <div class="relative">
     <input
@@ -13,16 +26,3 @@
     <i v-if="icon" :class="`pi pi-${icon} absolute left-3.5 top-1/2 -translate-y-1/2 text-wisteria/60 text-sm`"></i>
   </div>
 </template>
-
-<script setup>
-defineProps({
-  modelValue: { type: String, default: '' },
-  type: { type: String, default: 'text' },
-  placeholder: { type: String, default: '' },
-  icon: { type: String, default: '' },
-  id: { type: String, default: '' },
-  disabled: { type: Boolean, default: false }
-})
-
-defineEmits(['update:modelValue'])
-</script>

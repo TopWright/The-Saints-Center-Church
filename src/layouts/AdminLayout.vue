@@ -1,3 +1,20 @@
+<script setup>
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import Sidebar from '@/components/admin/Sidebar.vue'
+
+const sidebarCollapsed = ref(false)
+const mobileOpen = ref(false)
+const route = useRoute()
+
+// Close sidebar on route change for mobile
+watch(() => route.path, () => {
+  mobileOpen.value = false
+})
+</script>
+
+
+
 <template>
   <div class="flex min-h-screen bg-[#F8F9FA]">
     <Sidebar 
@@ -11,7 +28,7 @@
       :class="sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'"
     >
       <!-- Global Header -->
-      <header class="h-20 bg-white flex items-center justify-between px-6 lg:px-10 sticky top-0 z-30">
+      <header class="h-20 bg-white flex items-center justify-between px-6 lg:px-10 sticky top-0 z-30 mb-5">
         <!-- Logo/Title -->
         <div class="flex items-center gap-3 lg:gap-4">
           <button @click="mobileOpen = !mobileOpen" class="text-[#0b1221] p-2 -ml-2 lg:hidden">
@@ -39,7 +56,7 @@
         <div class="flex items-center gap-4 lg:gap-8">
           <!-- Notification -->
           <button class="relative text-[#0b1221] hover:opacity-70 transition-opacity p-2">
-            <i class="pi pi-bell text-xl"></i>
+            <i class="pi pi-bell text-2xl"></i>
             <span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-[#d47a22] rounded-full border-2 border-white"></span>
           </button>
 
@@ -75,17 +92,4 @@
   </div>
 </template>
 
-<script setup>
-import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import Sidebar from '@/components/admin/Sidebar.vue'
 
-const sidebarCollapsed = ref(false)
-const mobileOpen = ref(false)
-const route = useRoute()
-
-// Close sidebar on route change for mobile
-watch(() => route.path, () => {
-  mobileOpen.value = false
-})
-</script>

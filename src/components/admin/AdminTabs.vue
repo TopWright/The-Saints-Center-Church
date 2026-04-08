@@ -1,3 +1,12 @@
+<script setup>
+defineProps({
+  modelValue: { type: String, required: true },
+  tabs: { type: Array, required: true }
+})
+
+defineEmits(['update:modelValue'])
+</script>
+
 <template>
   <div class="flex items-center gap-1 p-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full w-fit">
     <button
@@ -14,12 +23,3 @@
     </button>
   </div>
 </template>
-
-<script setup>
-defineProps({
-  modelValue: { type: String, required: true },
-  tabs: { type: Array, required: true }
-})
-
-defineEmits(['update:modelValue'])
-</script>

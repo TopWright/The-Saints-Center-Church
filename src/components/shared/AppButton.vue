@@ -1,27 +1,3 @@
-<template>
-  <component
-    :is="componentTag"
-    :type="type"
-    :to="to"
-    :href="href"
-    :disabled="loading || disabled"
-    class="relative inline-flex items-center justify-center gap-3 font-sans font-bold tracking-widest uppercase overflow-hidden transition-all duration-500 rounded-full group disabled:opacity-50 disabled:cursor-not-allowed z-10 shadow-xl cursor-pointer hover:shadow-2xl hover:-translate-y-1"
-    :class="[sizeClasses, variantClasses]"
-  >
-    <!-- Background ripple/sweep overlay for that 'creative hover' -->
-    <div class="absolute inset-0 w-full h-full transform scale-x-0 group-hover:scale-x-100 origin-right transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] -z-10" :class="hoverOverlayClasses"></div>
-    
-    <div class="flex items-center gap-2 relative z-10 transform group-hover:scale-105 transition-transform duration-300">
-      <i v-if="loading" class="pi pi-spin pi-spinner text-inherit"></i>
-      <i v-else-if="icon && iconPosition === 'left'" :class="`pi pi-${icon} text-[14px] group-hover:-rotate-12 transition-transform duration-300`"></i>
-      
-      <span><slot /></span>
-      
-      <i v-if="icon && iconPosition === 'right' && !loading" :class="`pi pi-${icon} text-[14px] group-hover:translate-x-1 transition-transform duration-300`"></i>
-    </div>
-  </component>
-</template>
-
 <script setup>
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
@@ -70,3 +46,27 @@ const sizeClasses = computed(() => ({
   lg: 'px-10 py-5 text-[12px]'
 }[props.size]))
 </script>
+
+<template>
+  <component
+    :is="componentTag"
+    :type="type"
+    :to="to"
+    :href="href"
+    :disabled="loading || disabled"
+    class="relative inline-flex items-center justify-center gap-3 font-sans font-bold tracking-widest uppercase overflow-hidden transition-all duration-500 rounded-full group disabled:opacity-50 disabled:cursor-not-allowed z-10 shadow-xl cursor-pointer hover:shadow-2xl hover:-translate-y-1"
+    :class="[sizeClasses, variantClasses]"
+  >
+    <!-- Background ripple/sweep overlay for that 'creative hover' -->
+    <div class="absolute inset-0 w-full h-full transform scale-x-0 group-hover:scale-x-100 origin-right transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] -z-10" :class="hoverOverlayClasses"></div>
+    
+    <div class="flex items-center gap-2 relative z-10 transform group-hover:scale-105 transition-transform duration-300">
+      <i v-if="loading" class="pi pi-spin pi-spinner text-inherit"></i>
+      <i v-else-if="icon && iconPosition === 'left'" :class="`pi pi-${icon} text-[14px] group-hover:-rotate-12 transition-transform duration-300`"></i>
+      
+      <span><slot /></span>
+      
+      <i v-if="icon && iconPosition === 'right' && !loading" :class="`pi pi-${icon} text-[14px] group-hover:translate-x-1 transition-transform duration-300`"></i>
+    </div>
+  </component>
+</template>

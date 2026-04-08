@@ -1,3 +1,9 @@
+<script setup>
+defineProps({
+  programme: { type: Object, required: true }
+})
+</script>
+
 <template>
   <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 border border-gray-50">
     <div class="p-6">
@@ -33,9 +39,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-defineProps({
-  programme: { type: Object, required: true }
-})
-</script>

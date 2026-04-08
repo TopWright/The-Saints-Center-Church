@@ -1,14 +1,37 @@
+<script setup>
+import { ref } from 'vue'
+import AdminTabs from '@/components/admin/AdminTabs.vue'
+import ProfileSettingsTab from '@/components/admin/ProfileSettingsTab.vue'
+import ChurchInformationTab from '@/components/admin/ChurchInformationTab.vue'
+import DisciplesLeadersTab from '@/components/admin/DisciplesLeadersTab.vue'
+import AppModal from '@/components/shared/AppModal.vue'
+
+const activeTab = ref('profile')
+const modalTitle = ref('')
+
+const settingsTabs = [
+  { label: 'Profile Settings', value: 'profile' },
+  { label: 'Church Information', value: 'church' },
+  { label: 'Disciples & Leaders', value: 'disciples' }
+]
+
+const openModal = (title) => {
+  modalTitle.value = title
+}
+</script>
+
 <template>
   <div class="space-y-10 pb-20">
     <!-- Header with Glass Tabs -->
     <div class="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-8 pt-4 relative">
       <!-- Watermark Background -->
-      <h2 class="absolute -top-12 left-0 text-[100px] font-display font-black text-[#0b1221]/5 leading-none select-none tracking-tighter">Settings</h2>
+      <h2 class="absolute -top-8 left-0 text-[100px] font-display font-black text-[#0b1221]/5 leading-none select-none tracking-tighter">Settings</h2>
       
       <div class="space-y-2 relative z-10">
         <div class="flex items-center gap-4">
-          <h1 class="text-[64px] font-display font-black text-[#0b1221] leading-[0.85] tracking-tighter">
-            Portal <span class="text-[#d47a22] font-display italic">Settings</span>
+          <h1 class="text-[52px] font-display font-black text-[#0b1221] leading-[0.85] tracking-tighter">
+            Portal Settings
+            <!-- <span class="text-[#d47a22] font-display italic">Settings</span> -->
           </h1>
         </div>
         <p class="text-[14px] font-sans font-medium text-[#707070] tracking-tight">
@@ -72,28 +95,6 @@
     </AppModal>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import AdminTabs from '@/components/admin/AdminTabs.vue'
-import ProfileSettingsTab from '@/components/admin/ProfileSettingsTab.vue'
-import ChurchInformationTab from '@/components/admin/ChurchInformationTab.vue'
-import DisciplesLeadersTab from '@/components/admin/DisciplesLeadersTab.vue'
-import AppModal from '@/components/shared/AppModal.vue'
-
-const activeTab = ref('profile')
-const modalTitle = ref('')
-
-const settingsTabs = [
-  { label: 'Profile Settings', value: 'profile' },
-  { label: 'Church Information', value: 'church' },
-  { label: 'Disciples & Leaders', value: 'disciples' }
-]
-
-const openModal = (title) => {
-  modalTitle.value = title
-}
-</script>
 
 <style scoped>
 .no-scrollbar::-webkit-scrollbar {

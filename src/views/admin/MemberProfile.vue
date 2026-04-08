@@ -1,3 +1,45 @@
+<script setup>
+import { ref } from 'vue'
+
+const profile = ref({
+  name: 'John Doe',
+  avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=256&h=256&auto=format&fit=crop',
+  role: 'Minister',
+  position: 'Youth Outreach Specialist',
+  leader: 'Pastor Sarah Jenkins'
+})
+
+const metrics = ref([
+  { label: 'People Reached', value: '124', icon: 'users' },
+  { label: 'Spirit-Filled', value: '45', icon: 'sparkles' },
+  { label: 'Healings', value: '12', icon: 'heart-fill' }
+])
+
+const history = ref([
+  {
+    id: 1,
+    type: 'EVANGELISM',
+    date: 'Oct 24, 2023',
+    title: 'Downtown Park Outreach',
+    description: 'Shared the gospel with a group of students. 3 people gave their lives to Christ and requested follow-up next week.'
+  },
+  {
+    id: 2,
+    type: 'FOLLOW-UP',
+    date: 'Oct 21, 2023',
+    title: 'Home Visit: The Miller Family',
+    description: 'Deeply encouraging time of prayer. Discussed the foundations of faith and invited them to Sunday service.'
+  },
+  {
+    id: 3,
+    type: 'EVANGELISM',
+    date: 'Oct 18, 2023',
+    title: 'Neighborhood Door-to-Door',
+    description: 'Met Mark who had many questions about healing. Prayed for his recovery and left a testimony booklet.'
+  }
+])
+</script>
+
 <template>
   <div class="space-y-10 pb-20">
     <!-- Header Navigation -->
@@ -127,45 +169,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-
-const profile = ref({
-  name: 'John Doe',
-  avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=256&h=256&auto=format&fit=crop',
-  role: 'Minister',
-  position: 'Youth Outreach Specialist',
-  leader: 'Pastor Sarah Jenkins'
-})
-
-const metrics = ref([
-  { label: 'People Reached', value: '124', icon: 'users' },
-  { label: 'Spirit-Filled', value: '45', icon: 'sparkles' },
-  { label: 'Healings', value: '12', icon: 'heart-fill' }
-])
-
-const history = ref([
-  {
-    id: 1,
-    type: 'EVANGELISM',
-    date: 'Oct 24, 2023',
-    title: 'Downtown Park Outreach',
-    description: 'Shared the gospel with a group of students. 3 people gave their lives to Christ and requested follow-up next week.'
-  },
-  {
-    id: 2,
-    type: 'FOLLOW-UP',
-    date: 'Oct 21, 2023',
-    title: 'Home Visit: The Miller Family',
-    description: 'Deeply encouraging time of prayer. Discussed the foundations of faith and invited them to Sunday service.'
-  },
-  {
-    id: 3,
-    type: 'EVANGELISM',
-    date: 'Oct 18, 2023',
-    title: 'Neighborhood Door-to-Door',
-    description: 'Met Mark who had many questions about healing. Prayed for his recovery and left a testimony booklet.'
-  }
-])
-</script>

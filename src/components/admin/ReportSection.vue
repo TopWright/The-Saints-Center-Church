@@ -1,3 +1,13 @@
+<script setup>
+import ExportButton from './ExportButton.vue'
+
+defineProps({
+  title: { type: String, required: true },
+  subtitle: { type: String, default: '' },
+  viewAllLink: { type: String, default: '' }
+})
+</script>
+
 <template>
   <div class="bg-white rounded-[40px] shadow-sm border border-[#f0f2f5] overflow-hidden">
     <div class="p-8 lg:p-10 border-b border-[#f0f2f5] flex flex-col sm:flex-row sm:items-center justify-between gap-6">
@@ -22,13 +32,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import ExportButton from './ExportButton.vue'
-
-defineProps({
-  title: { type: String, required: true },
-  subtitle: { type: String, default: '' },
-  viewAllLink: { type: String, default: '' }
-})
-</script>

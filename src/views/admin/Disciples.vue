@@ -4,7 +4,7 @@
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
       <div class="space-y-4">
         <h1 class="font-display text-5xl md:text-7xl text-[#0b1221] leading-[0.85] tracking-tighter font-bold">
-          Discipleship <span class="text-[#0b1221]/40">Directory</span>
+          Discipleship <span class="text-[#d47a22] font-display italic">Directory</span>
         </h1>
         <p class="font-sans text-[15px] text-[#707070] font-medium tracking-tight max-w-[550px] leading-relaxed">
           Managing the growth and connection of our spiritual community. View reports, oversee roles, and nurture every member of the sanctuary.

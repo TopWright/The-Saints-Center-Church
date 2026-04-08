@@ -1,3 +1,15 @@
+<script setup>
+import { onMounted } from 'vue'
+import StatsCard from '@/components/admin/StatsCard.vue'
+import ActivityList from '@/components/admin/ActivityList.vue'
+import ActiveLeaders from '@/components/admin/ActiveLeaders.vue'
+import FieldPersonnel from '@/components/admin/FieldPersonnel.vue'
+
+onMounted(() => {
+  // Reveal animations could be added here
+})
+</script>
+
 <template>
   <div class="space-y-10 relative pb-20">
     <!-- Header Section -->
@@ -80,15 +92,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { onMounted } from 'vue'
-import StatsCard from '@/components/admin/StatsCard.vue'
-import ActivityList from '@/components/admin/ActivityList.vue'
-import ActiveLeaders from '@/components/admin/ActiveLeaders.vue'
-import FieldPersonnel from '@/components/admin/FieldPersonnel.vue'
-
-onMounted(() => {
-  // Reveal animations could be added here
-})
-</script>

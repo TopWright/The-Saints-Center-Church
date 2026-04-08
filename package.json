@@ -13,11 +13,13 @@
     "@tanstack/vue-query": "^5.96.2",
     "@vee-validate/yup": "^4.15.1",
     "axios": "^1.14.0",
+    "chart.js": "^4.5.1",
     "gsap": "^3.14.2",
     "primeicons": "^7.0.0",
     "primevue": "^4.5.4",
     "vee-validate": "^4.15.1",
     "vue": "^3.5.32",
+    "vue-chartjs": "^5.3.3",
     "vue-router": "^4.6.4",
     "yup": "^1.7.1"
   },

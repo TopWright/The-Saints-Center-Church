@@ -21,43 +21,55 @@
         :to="item.to"
         class="flex items-center gap-4 px-4 py-3.5 rounded-xl text-[13px] font-sans font-medium transition-all duration-300 group"
         :class="collapsed ? 'justify-center' : ''"
-        active-class="bg-white/10 shadow-lg !text-white"
+        :active-class="item.to === '/admin' ? '' : 'bg-gradient-to-r from-bronze to-bronze-dark shadow-lg shadow-bronze/20 !text-white transform scale-[1.02]'"
+        :exact-active-class="'bg-gradient-to-r from-bronze to-bronze-dark shadow-lg shadow-bronze/20 !text-white transform scale-[1.02]'"
       >
         <i :class="[`pi pi-${item.icon}`, 'text-lg opacity-60 group-hover:opacity-100 transition-opacity']"></i>
         <span v-if="!collapsed" class="tracking-wide">{{ item.label }}</span>
       </router-link>
     </nav>
 
-    <!-- Bottom Action -->
-    <div class="p-4 mt-auto">
-      <button 
-        v-if="!collapsed"
-        class="w-full bg-[#d47a22] hover:bg-[#c36a1b] text-white py-4 rounded-2xl font-sans font-bold text-[14px] shadow-lg shadow-[#d47a22]/20 transition-all duration-300 active:scale-95 flex items-center justify-center gap-2"
+    <!-- Profile & Logout -->
+    <div class="px-4 pb-8 mt-auto space-y-4">
+      <!-- Profile Section -->
+      <div 
+        class="bg-white/5 rounded-[24px] p-4 flex items-center gap-3 transition-all duration-300"
+        :class="collapsed ? 'justify-center' : ''"
       >
-        New Entry
-      </button>
+        <div class="w-10 h-10 rounded-full border border-white/10 overflow-hidden shrink-0">
+          <img src="/vector-profiles/1.png" alt="Pastor Samuel" class="w-full h-full object-cover" />
+        </div>
+        <div v-if="!collapsed" class="min-w-0">
+          <p class="text-[13px] font-bold text-white truncate">Pastor Samuel</p>
+          <p class="text-[10px] font-bold text-[#a0a0a0] uppercase tracking-widest truncate">Lead Administrator</p>
+        </div>
+      </div>
+
+      <!-- Logout Action -->
       <button 
-        v-else
-        class="w-full h-12 bg-[#d47a22] rounded-xl flex items-center justify-center text-white"
-        title="New Entry"
+        class="flex items-center gap-4 px-4 py-3.5 rounded-xl text-[13px] font-sans font-medium text-[#a0a0a0] hover:text-white hover:bg-white/5 transition-all duration-300 group w-full"
+        :class="collapsed ? 'justify-center' : ''"
+        @click="handleLogout"
       >
-        <i class="pi pi-plus"></i>
-      </button>
-      
-      <!-- Collapse toggle hidden in mockup sidebar edge but keeping functionality -->
-      <button 
-        @click="$emit('toggle')"
-        class="w-full mt-4 py-2 text-[#a0a0a0] hover:text-white transition-colors text-[10px] uppercase tracking-widest font-bold"
-      >
-        {{ collapsed ? '→' : 'Collapse Sidebar' }}
+        <i class="pi pi-sign-out text-lg opacity-60 group-hover:opacity-100 transition-opacity"></i>
+        <span v-if="!collapsed" class="tracking-wide">Logout</span>
       </button>
     </div>
   </aside>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+
 defineProps({ collapsed: { type: Boolean, default: false } })
 defineEmits(['toggle'])
+
+const router = useRouter()
+
+const handleLogout = () => {
+  localStorage.removeItem('tsc_token')
+  router.push({ name: 'Login' })
+}
 
 const menuItems = [
   { to: '/admin', icon: 'objects-column', label: 'Dashboard' },

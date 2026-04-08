@@ -2,12 +2,12 @@
   <div class="space-y-10 relative pb-20">
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
-      <div class="space-y-3">
-        <h1 class="font-display text-5xl md:text-7xl text-[#0b1221] leading-[0.9] tracking-tighter">
-          Ministry <br/>
-          <span class="italic text-[#d47a22] font-medium">Reporting System</span>
-        </h1>
-        <p class="font-sans text-[15px] text-[#707070] font-medium tracking-tight">
+      <div class="space-y-3 relative">
+       <h2 class="absolute -top-10 left-0 text-[100px] font-display font-black text-[#0b1221]/5 leading-none select-none tracking-tighter">Dashboard</h2>
+          <h1 class="text-[52px] font-display font-black text-[#0b1221] leading-[0.9] tracking-tighter relative z-10">
+            Ministry Reporting
+          </h1>
+        <p class="text-[14px] font-sans font-medium text-[#707070] tracking-tight relative z-10">
           Tracking spiritual fruitfulness and kingdom expansion.
         </p>
       </div>

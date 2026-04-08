@@ -34,6 +34,7 @@ const routes = [
       { path: 'disciples/:id', name: 'DiscipleDetails', component: () => import('@/views/admin/DiscipleDetails.vue') },
       { path: 'reports', name: 'Reports', component: () => import('@/views/admin/Reports.vue') },
       { path: 'users', name: 'Users', component: () => import('@/views/admin/Users.vue') },
+      { path: 'users/:id', name: 'MemberProfile', component: () => import('@/views/admin/MemberProfile.vue') },
       { path: 'settings', name: 'Settings', component: () => import('@/views/admin/Settings.vue') }
     ]
   }

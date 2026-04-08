@@ -1,86 +1,106 @@
 <template>
-  <div>
-    <div class="mb-6">
-      <h1 class="text-2xl font-bold text-onyx">Settings</h1>
-      <p class="text-wisteria text-sm">Church and application configuration</p>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div class="bg-white rounded-xl border border-gray-50 p-6">
-        <h3 class="font-semibold text-onyx mb-4">Church Information</h3>
-        <form class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-onyx mb-1.5">Church Name</label>
-            <input v-model="settings.churchName" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-bronze focus:ring-1 focus:ring-bronze/30 text-sm" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-onyx mb-1.5">Tagline</label>
-            <input v-model="settings.tagline" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-bronze focus:ring-1 focus:ring-bronze/30 text-sm" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-onyx mb-1.5">Location</label>
-            <input v-model="settings.location" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-bronze focus:ring-1 focus:ring-bronze/30 text-sm" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-onyx mb-1.5">Phone</label>
-            <input v-model="settings.phone" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-bronze focus:ring-1 focus:ring-bronze/30 text-sm" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-onyx mb-1.5">Email</label>
-            <input v-model="settings.email" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-bronze focus:ring-1 focus:ring-bronze/30 text-sm" />
-          </div>
-          <button type="button" class="bg-bronze hover:bg-bronze-light text-ghost font-semibold px-6 py-2.5 rounded-lg transition-all text-sm">
-            Save Changes
-          </button>
-        </form>
+  <div class="space-y-10 pb-20">
+    <!-- Header with Glass Tabs -->
+    <div class="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-8 pt-4 relative">
+      <!-- Watermark Background -->
+      <h2 class="absolute -top-12 left-0 text-[100px] font-display font-black text-[#0b1221]/5 leading-none select-none tracking-tighter">Settings</h2>
+      
+      <div class="space-y-2 relative z-10">
+        <div class="flex items-center gap-4">
+          <h1 class="text-[64px] font-display font-black text-[#0b1221] leading-[0.85] tracking-tighter">
+            Portal <span class="text-[#d47a22] font-display italic">Settings</span>
+          </h1>
+        </div>
+        <p class="text-[14px] font-sans font-medium text-[#707070] tracking-tight">
+          Refine your administrative experience and manage the leadership hierarchy.
+        </p>
       </div>
 
+      <div class="relative z-10 w-full xl:w-auto overflow-x-auto no-scrollbar pb-2 xl:pb-0">
+        <AdminTabs 
+          v-model="activeTab" 
+          :tabs="settingsTabs" 
+        />
+      </div>
+    </div>
+
+    <!-- Tab Content Area -->
+    <Transition
+      enter-active-class="transition duration-500 ease-out"
+      enter-from-class="opacity-0 translate-y-8"
+      enter-to-class="opacity-100 translate-y-0"
+      mode="out-in"
+    >
+      <div :key="activeTab">
+        <ProfileSettingsTab v-if="activeTab === 'profile'" />
+        <ChurchInformationTab v-if="activeTab === 'church'" />
+        <DisciplesLeadersTab 
+          v-if="activeTab === 'disciples'" 
+          @create-role="openModal('New Ministry Role')"
+          @add-position="openModal('New Department Position')"
+        />
+      </div>
+    </Transition>
+
+    <!-- Global Modals -->
+    <AppModal 
+      :show="!!modalTitle" 
+      :title="modalTitle"
+      @close="modalTitle = ''"
+    >
       <div class="space-y-6">
-        <div class="bg-white rounded-xl border border-gray-50 p-6">
-          <h3 class="font-semibold text-onyx mb-4">Service Times</h3>
-          <div class="space-y-3">
-            <div v-for="(service, idx) in settings.services" :key="idx" class="flex items-center gap-3">
-              <input v-model="service.day" class="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-bronze" />
-              <input v-model="service.time" class="w-40 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-bronze" />
-            </div>
+        <p class="text-[14px] font-medium text-[#707070]">
+          Define the parameters for your {{ modalTitle.toLowerCase() }}. This will be reflected across the ministry hierarchy.
+        </p>
+        <div class="space-y-4">
+          <div class="space-y-1.5">
+            <label class="text-[10px] uppercase font-bold text-[#a0a0a0] tracking-widest px-1">Name / Title</label>
+            <input type="text" class="w-full bg-[#f0f2f5] border-none rounded-2xl py-3.5 px-6 text-[14px] font-bold text-[#0b1221]" />
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-[10px] uppercase font-bold text-[#a0a0a0] tracking-widest px-1">Description</label>
+            <textarea rows="3" class="w-full bg-[#f0f2f5] border-none rounded-2xl py-3.5 px-6 text-[14px] font-medium text-[#0b1221] resize-none"></textarea>
           </div>
         </div>
-
-        <div class="bg-white rounded-xl border border-gray-50 p-6">
-          <h3 class="font-semibold text-onyx mb-4">Account</h3>
-          <button
-            @click="handleLogout"
-            class="w-full border-2 border-red-200 text-red-500 hover:bg-red-50 font-semibold py-2.5 rounded-lg transition-all text-sm"
-          >
-            Sign Out
-          </button>
-        </div>
       </div>
-    </div>
+      <template #footer>
+        <div class="flex justify-end gap-3">
+          <button @click="modalTitle = ''" class="px-6 py-2 rounded-xl text-[13px] font-bold text-[#707070]">Cancel</button>
+          <button @click="modalTitle = ''" class="px-8 py-2 rounded-xl bg-[#0b1221] text-white text-[13px] font-bold">Create</button>
+        </div>
+      </template>
+    </AppModal>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import AdminTabs from '@/components/admin/AdminTabs.vue'
+import ProfileSettingsTab from '@/components/admin/ProfileSettingsTab.vue'
+import ChurchInformationTab from '@/components/admin/ChurchInformationTab.vue'
+import DisciplesLeadersTab from '@/components/admin/DisciplesLeadersTab.vue'
+import AppModal from '@/components/shared/AppModal.vue'
 
-const router = useRouter()
+const activeTab = ref('profile')
+const modalTitle = ref('')
 
-const settings = ref({
-  churchName: 'The Saints Center',
-  tagline: 'The Citadel of Revelation and Power',
-  location: 'Iba, Lagos State, Nigeria',
-  phone: '+234 XXX XXX XXXX',
-  email: 'info@thesaintscenter.org',
-  services: [
-    { day: 'Sunday', time: '8:00 AM - 10:30 AM' },
-    { day: 'Wednesday', time: '6:00 PM - 7:30 PM' },
-    { day: 'Friday', time: '6:00 PM - 8:00 PM' }
-  ]
-})
+const settingsTabs = [
+  { label: 'Profile Settings', value: 'profile' },
+  { label: 'Church Information', value: 'church' },
+  { label: 'Disciples & Leaders', value: 'disciples' }
+]
 
-const handleLogout = () => {
-  localStorage.removeItem('tsc_token')
-  router.push('/auth/login')
+const openModal = (title) => {
+  modalTitle.value = title
 }
 </script>
+
+<style scoped>
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>

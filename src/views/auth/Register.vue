@@ -12,8 +12,26 @@
     </p>
 
     <form @submit.prevent="handleRegister" class="w-full space-y-6">
+      <!-- Avatar Selection -->
+      <div class="reg-anim w-full space-y-3">
+        <label class="block font-sans font-bold text-[10px] uppercase tracking-[0.2em] text-[#1a1d20]/60 ml-6">
+          Choose Profile Avatar
+        </label>
+        <div class="flex gap-4 overflow-x-auto pb-4 px-6 snap-x -mx-6 custom-scrollbar">
+          <div 
+            v-for="i in 30" 
+            :key="i"
+            @click="form.avatar = i"
+            class="w-16 h-16 rounded-full shrink-0 cursor-pointer transition-all duration-300 border-4 snap-center relative overflow-hidden"
+            :class="form.avatar === i ? 'border-[#d47a22] scale-110 shadow-lg shadow-[#d47a22]/20' : 'border-transparent opacity-60 hover:opacity-100 hover:border-[#d47a22]/30 hover:scale-105'"
+          >
+            <img :src="`/vector-profiles/${i}.png`" alt="Avatar" class="w-full h-full object-cover bg-[#f0f2f5]" />
+          </div>
+        </div>
+      </div>
+
       <!-- Grid Container -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mt-2">
         
         <!-- Full Name -->
         <div class="reg-anim space-y-2">
@@ -150,6 +168,7 @@ const router = useRouter()
 const loading = ref(false)
 
 const form = ref({
+  avatar: 1,
   fullName: '',
   email: '',
   password: '',

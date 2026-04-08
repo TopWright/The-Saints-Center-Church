@@ -41,6 +41,10 @@
 
 }
 
+button {
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -103,8 +107,13 @@
 /* the size of the text in the description of the hero should be the main text size every in the app. make it a little bolder just a little still increase the hero headline and make the text still bigger the circles are nice but not visible... make it a an animated */
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-marquee {
@@ -115,19 +124,36 @@
 
 /* Ripple Animation */
 @keyframes ripple {
-  0% { transform: scale(0); opacity: 0.5; }
-  100% { transform: scale(4); opacity: 0; }
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
 }
+
 .animate-ripple {
   animation: ripple 0.8s ease-out forwards;
 }
 
 /* Background Rotation */
 @keyframes bg-rotate {
-  0% { transform: rotate(0deg) scale(1.5); }
-  50% { transform: rotate(180deg) scale(1.8); }
-  100% { transform: rotate(360deg) scale(1.5); }
+  0% {
+    transform: rotate(0deg) scale(1.5);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(1.8);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1.5);
+  }
 }
+
 .animate-bg-rotate {
   animation: bg-rotate 40s linear infinite;
 }
